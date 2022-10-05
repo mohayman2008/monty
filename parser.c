@@ -1,0 +1,97 @@
+#include "monty.h"
+
+/**
+ * get_code_line - gets a line from an arbitary file
+ * @ifile: input file
+ * @buf: pointer to a buffer to store the line
+ *
+ * Return: the new line or NULL if EOF has been reached
+ */
+char *get_code_line(FILE *ifile, char **buf)
+{
+	size_t size = 0;
+
+	if (getline(buf, &size, ifile) < 0)
+	{
+		if (!errno)
+			return (NULL);
+		malloc_error();
+	}
+/*	printf("%s", *buf);*/
+/*	get_tokens(*buf);*/
+
+	return (*buf);
+}
+
+/**
+ * get_tokens - get tokens from a string and store them in a string array
+ * @line: input string
+ *
+ * Return: the dynamically allocated strings array
+ */
+char **get_tokens(char *line)
+{
+	char **tokens = NULL, **new = NULL, *current = NULL;
+	int size = 0, i = 0, size_inc = 4;
+
+	if (!line)
+		return (NULL);
+
+	current = strtok(line, DELIM);
+	while (current)
+	{
+		if (i >= size)
+		{
+			new = _realloc(tokens, sizeof(*tokens) * (size + size_inc + 1));
+			if (!new)
+				free(line), /*free_tokens(tokens), */malloc_error();
+			tokens = new;
+			size += size_inc;
+		}
+		tokens[i++] = strdup(current);
+		current = strtok(NULL, DELIM);
+	}
+	if (size)
+		tokens[i] = NULL;
+/*	for (i = 0 ; size && tokens[i] ; i++)*/
+/*		printf("Token %d: %s\n", i, tokens[i]);*/
+/*	putchar('\n');*/
+
+/*	parse(tokens, 0);*/
+
+	return (tokens);
+}
+
+/**
+ * f - dummy place holder
+ * @stack: dummy
+ * @line_number: dummy
+ */
+void f(stack_t **stack, unsigned int line_number)
+{
+	(void) stack;
+
+	printf("Line number is %d\n", line_number);
+}
+
+/**
+ * parse - parse and execute a line of monty code
+ * @tokens: array of strings containg the tokens in a line of code
+ * @line_num: number of the line in the file starting with 1
+ * @stack: data stack (or queue)
+ */
+void parse(char **tokens, int line_num, stack_t **stack)
+{
+	instruction_t list[] = {{"push", f}, {"pall", f}, {NULL, 0}};
+	int i = 0;
+
+	if (!tokens || !*tokens)
+		return;
+
+	for (; list[i].opcode ; i++)
+	{
+		if (!strcmp(tokens[0], list[i].opcode))
+			printf("%sing\n", list[i].opcode),
+			list[i].f(stack, line_num);
+	}
+}
