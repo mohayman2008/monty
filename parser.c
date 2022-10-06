@@ -65,7 +65,8 @@ void parse(char **tokens, int line_num, stack_t **stack)
 				{"queue", to_queue}, {"stack", to_stack},
 				{"pall", print_all}, {"pint", print_int},
 				{"pchar", print_char}, {"pstr", print_str},
-				{"swap", swap}, {"add", add}, {"sub", sub},
+				{"swap", swap}, {"rotl", rot_left},
+				{"rotr", rot_right}, {"add", add}, {"sub", sub},
 				{"mul", mul}, {"div", _div}, {"mod", mod},
 				{"nop", nop}, {NULL, 0}};
 	int i = 0;

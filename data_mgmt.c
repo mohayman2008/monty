@@ -47,3 +47,59 @@ void to_stack(stack_t **stack, unsigned int line_number)
 
 	exec_code.data_type = 0;
 }
+
+/**
+ * rot_left - rotates the stack to the top.
+ * @stack: stack or queue head
+ * @line_number: number of the line starting from 1
+ */
+void rot_left(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tail;
+
+	(void) stack;
+	(void) line_number;
+
+	if (exec_code.data_t)
+	{
+		tail = exec_code.data_t;
+
+		if (tail->prev)
+			tail->prev->next = NULL;
+		exec_code.data_t = tail->prev;
+		tail->prev = NULL;
+
+		tail->next = exec_code.data_h;
+		if (tail->next)
+			tail->next->prev = tail;
+		exec_code.data_h = tail;
+	}
+}
+
+/**
+ * rot_right - rotates the stack to the top.
+ * @stack: stack or queue head
+ * @line_number: number of the line starting from 1
+ */
+void rot_right(stack_t **stack, unsigned int line_number)
+{
+	stack_t *head;
+
+	(void) stack;
+	(void) line_number;
+
+	if (exec_code.data_h)
+	{
+		head = exec_code.data_h;
+
+		if (head->next)
+			head->next->prev = NULL;
+		exec_code.data_h = head->next;
+		head->next = NULL;
+
+		head->prev = exec_code.data_t;
+		if (head->prev)
+			head->prev->next = head;
+		exec_code.data_t = head;
+	}
+}

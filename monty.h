@@ -91,6 +91,8 @@ void enqueue(stack_t *node);
 void swap(stack_t **stack, unsigned int line_number);
 void to_queue(stack_t **stack, unsigned int line_number);
 void to_stack(stack_t **stack, unsigned int line_number);
+void rot_left(stack_t **stack, unsigned int line_number);
+void rot_right(stack_t **stack, unsigned int line_number);
 
 /*------------------------arithmetic.c------------------------*/
 void add(stack_t **stack, unsigned int line_number);
