@@ -81,9 +81,12 @@ void nop(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 int pop_item(void);
 void pop(stack_t **stack, unsigned int line_number);
+void enqueue(stack_t *node);
 
 /*-------------------------data_mgmt.c------------------------*/
 void swap(stack_t **stack, unsigned int line_number);
+void to_queue(stack_t **stack, unsigned int line_number);
+void to_stack(stack_t **stack, unsigned int line_number);
 
 /*------------------------arithmetic.c------------------------*/
 void add(stack_t **stack, unsigned int line_number);

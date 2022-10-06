@@ -61,12 +61,13 @@ char **get_tokens(char *line)
  */
 void parse(char **tokens, int line_num, stack_t **stack)
 {
-	instruction_t list[] = {{"push", push}, {"pall", print_all},
-				{"pint", print_int}, {"pop", pop},
+	instruction_t list[] = {{"push", push}, {"pop", pop},
+				{"queue", to_queue}, {"stack", to_stack},
+				{"pall", print_all}, {"pint", print_int},
+				{"pchar", print_char}, {"pstr", print_str},
 				{"swap", swap}, {"add", add}, {"sub", sub},
 				{"mul", mul}, {"div", _div}, {"mod", mod},
-				{"nop", nop}, {"pchar", print_char},
-				{"pstr", print_str}, {NULL, 0}};
+				{"nop", nop}, {NULL, 0}};
 	int i = 0;
 
 	if (!tokens || !*tokens)

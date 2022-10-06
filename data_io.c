@@ -9,23 +9,29 @@
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
+	int num;
 	char *errmsg = "usage: push integer";
 
 	(void) stack;
 
-	if (!exec_code.tokens[1] ||
-		!(isdigit(exec_code.tokens[1][0]) || exec_code.tokens[1][0] == '-' ||
-			exec_code.tokens[1][0] == '+'))
+	if (!exec_code.tokens[1])
+/*		|| !(isdigit(exec_code.tokens[1][0]) || exec_code.tokens[1][0] == '-' ||*/
+/*			exec_code.tokens[1][0] == '+'))*/
 		/* print_error(line_number, errmsg) */
 		fprintf(stderr, "L%u: %s\n", line_number, errmsg),
 		exit(EXIT_FAILURE);
+	num = strtol(exec_code.tokens[1], NULL, 10);
+	if (errno == ERANGE)
+		fprintf(stderr, "L%u: %s\n", line_number, errmsg),
+		exit(EXIT_FAILURE);
+
+	new = malloc(sizeof(*new));
+	if (!new)
+		malloc_error();
+	new->n = num;
 
 	if (!exec_code.data_type) /* stack */
 	{
-		new = malloc(sizeof(*new));
-		if (!new)
-			malloc_error();
-		new->n = atoi(exec_code.tokens[1]);
 		new->prev = exec_code.data_t;
 		new->next = NULL;
 		if (exec_code.data_t)
@@ -34,8 +40,11 @@ void push(stack_t **stack, unsigned int line_number)
 		if (!exec_code.data_size)
 			exec_code.data_h = new;
 
-		exec_code.data_size++;
 	}
+	else
+		enqueue(new);
+
+	exec_code.data_size++;
 }
 
 /**
@@ -79,4 +88,20 @@ void pop(stack_t **stack, unsigned int line_number)
 	}
 
 	pop_item();
+}
+
+/**
+ * enqueue - enqueue a stack_t new node to the queue
+ *	(doesn't perform any errorchecks and shouldn't be called directly)
+ * @node: newly created stack_t node
+ */
+void enqueue(stack_t *node)
+{
+	node->prev = NULL;
+	node->next = exec_code.data_h;
+	if (exec_code.data_h)
+		exec_code.data_h->prev = node;
+	exec_code.data_h = node;
+	if (!exec_code.data_size)
+		exec_code.data_t = node;
 }
