@@ -8,7 +8,7 @@
  * Return: the newly allocated memory address or NULL if allocation failed or
  *						size == 0
  */
-void *_realloc(void *ptr, size_t new_size)
+void *re_alloc(void *ptr, size_t new_size)
 {
 	void *new = NULL;
 

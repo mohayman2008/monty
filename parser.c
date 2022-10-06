@@ -17,9 +17,6 @@ char *get_code_line(FILE *ifile, char **buf)
 			return (NULL);
 		malloc_error();
 	}
-/*	printf("%s", *buf);*/
-/*	get_tokens(*buf);*/
-
 	return (*buf);
 }
 
@@ -42,9 +39,9 @@ char **get_tokens(char *line)
 	{
 		if (i >= size)
 		{
-			new = _realloc(tokens, sizeof(*tokens) * (size + size_inc + 1));
+			new = re_alloc(tokens, sizeof(*tokens) * (size + size_inc + 1));
 			if (!new)
-				free(line), /*free_tokens(tokens), */malloc_error();
+				free(line), free_tokens(&tokens), malloc_error();
 			tokens = new;
 			size += size_inc;
 		}
@@ -53,11 +50,6 @@ char **get_tokens(char *line)
 	}
 	if (size)
 		tokens[i] = NULL;
-/*	for (i = 0 ; size && tokens[i] ; i++)*/
-/*		printf("Token %d: %s\n", i, tokens[i]);*/
-/*	putchar('\n');*/
-
-/*	parse(tokens, 0);*/
 
 	return (tokens);
 }
