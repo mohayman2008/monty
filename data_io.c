@@ -37,3 +37,46 @@ void push(stack_t **stack, unsigned int line_number)
 		exec_code.data_size++;
 	}
 }
+
+/**
+ * pop_item - pops an element of the top of the satck and returns its value
+ *		(doesn't check for errors and shouldn't be called directly)
+ *
+ * Return: the value of the popped element
+ */
+int pop_item(void)
+{
+	stack_t *tail;
+	int n;
+
+	tail = exec_code.data_t;
+	n = tail->n;
+	if (tail->prev)
+		tail->prev->next = NULL;
+	exec_code.data_t = tail->prev;
+
+	exec_code.data_size--;
+	if (!exec_code.data_size)
+		exec_code.data_h = NULL;
+
+	free(tail);
+	return (n);
+}
+
+/**
+ * pop - pops an element of the top of the satck
+ * @stack: stack or queue head
+ * @line_number: number of the line starting from 1
+ */
+void pop(stack_t **stack, unsigned int line_number)
+{
+	(void) stack;
+
+	if (!exec_code.data_size)
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	pop_item();
+}
