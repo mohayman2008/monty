@@ -64,7 +64,7 @@ void parse(char **tokens, int line_num, stack_t **stack)
 	instruction_t list[] = {{"push", push}, {"pall", print_all},
 				{"pint", print_int}, {"pop", pop},
 				{"swap", swap}, {"add", add}, {"sub", sub},
-				{NULL, 0}};
+				{"nop", nop}, {NULL, 0}};
 	int i = 0;
 
 	if (!tokens || !*tokens)

@@ -74,6 +74,9 @@ void *_realloc(void *ptr, size_t new_size);
 void free_tokens(char ***tokens);
 void free_data(void);
 
+/*---------------------------exec.c---------------------------*/
+void nop(stack_t **stack, unsigned int line_number);
+
 /*--------------------------data_io.c-------------------------*/
 void push(stack_t **stack, unsigned int line_number);
 int pop_item(void);
