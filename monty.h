@@ -41,21 +41,23 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * struct dataset_s - reference of stack or queue
- * @type: type of data set (0: stack, 1: queue)
- * @size: number of elements
- * @head: head of the data set
- * @tail: head of the data set
+ * struct monty_s - reference of stack or queue
+ * @tokens: the tokens of the next instruction line
+ * @data_type: type of data set (0: stack, 1: queue)
+ * @data_size: number of elements
+ * @data_h: head of the data set
+ * @data_t: head of the data set
  */
-typedef struct dataset_s
+typedef struct monty_s
 {
-	int type;
-	int size;
-	stack_t *head;
-	stack_t *tail;
-} dataset;
+	char **tokens;
+	int data_type;
+	int data_size;
+	stack_t *data_h;
+	stack_t *data_t;
+} monty;
 
-extern dataset data;
+extern monty exec_code;
 
 /*--------------------------parser.c--------------------------*/
 char *get_code_line(FILE *ifile, char **buf);
@@ -69,9 +71,16 @@ void malloc_error(void);
 void *_realloc(void *ptr, size_t new_size);
 
 /*---------------------------free.c---------------------------*/
-void free_tokens(char **tokens);
+void free_tokens(char ***tokens);
+void free_data(void);
+
+/*--------------------------data_io.c-------------------------*/
+void push(stack_t **stack, unsigned int line_number);
+
+/*--------------------------print.c---------------------------*/
+void print_all(stack_t **stack, unsigned int line_number);
 
 /*---------------------------main.c---------------------------*/
-void iterate(FILE *ifile, stack_t **stack);
+void iterate(FILE *ifile);
 
 #endif /* __MONTY_H__ */

@@ -63,18 +63,6 @@ char **get_tokens(char *line)
 }
 
 /**
- * f - dummy place holder
- * @stack: dummy
- * @line_number: dummy
- */
-void f(stack_t **stack, unsigned int line_number)
-{
-	(void) stack;
-
-	printf("Line number is %d\n", line_number);
-}
-
-/**
  * parse - parse and execute a line of monty code
  * @tokens: array of strings containg the tokens in a line of code
  * @line_num: number of the line in the file starting with 1
@@ -82,7 +70,7 @@ void f(stack_t **stack, unsigned int line_number)
  */
 void parse(char **tokens, int line_num, stack_t **stack)
 {
-	instruction_t list[] = {{"push", f}, {"pall", f}, {NULL, 0}};
+	instruction_t list[] = {{"push", push}, {"pall", print_all}, {NULL, 0}};
 	int i = 0;
 
 	if (!tokens || !*tokens)
@@ -91,7 +79,6 @@ void parse(char **tokens, int line_num, stack_t **stack)
 	for (; list[i].opcode ; i++)
 	{
 		if (!strcmp(tokens[0], list[i].opcode))
-			printf("%sing\n", list[i].opcode),
 			list[i].f(stack, line_num);
 	}
 }
