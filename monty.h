@@ -57,7 +57,7 @@ typedef struct monty_s
 	stack_t *data_t;
 } monty;
 
-extern monty exec_code;
+/*extern monty exec_code;*/
 
 /*--------------------------parser.c--------------------------*/
 char *get_code_line(FILE *ifile, char **buf);
