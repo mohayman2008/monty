@@ -65,13 +65,17 @@ void rot_left(stack_t **stack, unsigned int line_number)
 		tail = exec_code.data_t;
 
 		if (tail->prev)
+		{
 			tail->prev->next = NULL;
-		exec_code.data_t = tail->prev;
+			exec_code.data_t = tail->prev;
+		}
 		tail->prev = NULL;
 
-		tail->next = exec_code.data_h;
-		if (tail->next)
-			tail->next->prev = tail;
+		if (exec_code.data_h != tail)
+		{
+			exec_code.data_h->prev = tail;
+			tail->next = exec_code.data_h;
+		}
 		exec_code.data_h = tail;
 	}
 }
@@ -93,13 +97,17 @@ void rot_right(stack_t **stack, unsigned int line_number)
 		head = exec_code.data_h;
 
 		if (head->next)
+		{
 			head->next->prev = NULL;
-		exec_code.data_h = head->next;
+			exec_code.data_h = head->next;
+		}
 		head->next = NULL;
 
-		head->prev = exec_code.data_t;
-		if (head->prev)
-			head->prev->next = head;
+		if (exec_code.data_t != head)
+		{
+			exec_code.data_t->next = head;
+			head->prev = exec_code.data_h;
+		}
 		exec_code.data_t = head;
 	}
 }
