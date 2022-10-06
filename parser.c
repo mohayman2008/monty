@@ -4,14 +4,13 @@
  * get_code_line - gets a line from an arbitary file
  * @ifile: input file
  * @buf: pointer to a buffer to store the line
+ * @buf_size: size of the buffer
  *
  * Return: the new line or NULL if EOF has been reached
  */
-char *get_code_line(FILE *ifile, char **buf)
+char *get_code_line(FILE *ifile, char **buf, size_t *buf_size)
 {
-	size_t size = 0;
-
-	if (getline(buf, &size, ifile) < 0)
+	if (getline(buf, buf_size, ifile) < 0)
 	{
 		if (!errno)
 			return (NULL);

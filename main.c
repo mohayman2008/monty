@@ -10,9 +10,10 @@ monty exec_code = {NULL, 0, 0, NULL, NULL};
 void iterate(FILE *ifile)
 {
 	char *line_buf = NULL;
+	size_t line_buf_size = 0;
 	int line_num = 1;
 
-	while (get_code_line(ifile, &line_buf))
+	while (get_code_line(ifile, &line_buf, &line_buf_size))
 	{
 		exec_code.tokens = get_tokens(line_buf);
 		parse(exec_code.tokens, line_num, &exec_code.data_h);
@@ -45,6 +46,7 @@ int main(int ac, char **av)
 
 	iterate(source);
 
+	free_data();
 	fclose(source);
 	return (EXIT_SUCCESS);
 }

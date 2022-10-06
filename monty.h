@@ -60,7 +60,7 @@ typedef struct monty_s
 extern monty exec_code;
 
 /*--------------------------parser.c--------------------------*/
-char *get_code_line(FILE *ifile, char **buf);
+char *get_code_line(FILE *ifile, char **buf, size_t *buf_size);
 char **get_tokens(char *line);
 void parse(char **tokens, int line_num, stack_t **stack);
 

@@ -35,4 +35,5 @@ void free_data(void)
 
 	exec_code.data_h = NULL;
 	exec_code.data_t = NULL;
+	exec_code.data_size = 0;
 }
