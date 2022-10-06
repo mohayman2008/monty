@@ -79,6 +79,9 @@ void push(stack_t **stack, unsigned int line_number);
 int pop_item(void);
 void pop(stack_t **stack, unsigned int line_number);
 
+/*-------------------------data_mgmt.c------------------------*/
+void swap(stack_t **stack, unsigned int line_number);
+
 /*--------------------------print.c---------------------------*/
 void print_all(stack_t **stack, unsigned int line_number);
 void print_int(stack_t **stack, unsigned int line_number);
