@@ -20,7 +20,8 @@ void push(stack_t **stack, unsigned int line_number)
 		/* print_error(line_number, errmsg) */
 		fprintf(stderr, "L%u: %s\n", line_number, errmsg),
 		exit(EXIT_FAILURE);
-	num = strtol(exec_code.tokens[1], NULL, 10);
+/*	num = strtol(exec_code.tokens[1], NULL, 10);*/
+	num = _atoi(exec_code.tokens[1]);
 	if (errno == ERANGE)
 		fprintf(stderr, "L%u: %s\n", line_number, errmsg),
 		exit(EXIT_FAILURE);

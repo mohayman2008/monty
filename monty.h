@@ -74,6 +74,10 @@ void *_realloc(void *ptr, size_t new_size);
 void free_tokens(char ***tokens);
 void free_data(void);
 
+/*---------------------------atoi.c---------------------------*/
+int _isdigit(int c);
+int _atoi(char *s);
+
 /*---------------------------exec.c---------------------------*/
 void nop(stack_t **stack, unsigned int line_number);
 
