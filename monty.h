@@ -95,6 +95,8 @@ void mod(stack_t **stack, unsigned int line_number);
 /*--------------------------print.c---------------------------*/
 void print_all(stack_t **stack, unsigned int line_number);
 void print_int(stack_t **stack, unsigned int line_number);
+void print_char(stack_t **stack, unsigned int line_number);
+void print_str(stack_t **stack, unsigned int line_number);
 
 /*---------------------------main.c---------------------------*/
 void iterate(FILE *ifile);
