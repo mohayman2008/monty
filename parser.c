@@ -80,4 +80,5 @@ void parse(char **tokens, int line_num, stack_t **stack)
 	}
 
 	fprintf(stderr, "L%u: unknown instruction %s\n", line_num, tokens[0]);
+	exit(EXIT_FAILURE);
 }
