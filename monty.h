@@ -68,7 +68,7 @@ void parse(char **tokens, int line_num, stack_t **stack);
 void malloc_error(void);
 
 /*--------------------------memory.c--------------------------*/
-void *re_alloc(void *ptr, size_t new_size);
+void *_realloc(void *ptr, size_t new_size);
 
 /*---------------------------free.c---------------------------*/
 void free_tokens(char ***tokens);

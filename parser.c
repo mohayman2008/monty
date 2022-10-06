@@ -39,7 +39,7 @@ char **get_tokens(char *line)
 	{
 		if (i >= size)
 		{
-			new = re_alloc(tokens, sizeof(*tokens) * (size + size_inc + 1));
+			new = _realloc(tokens, sizeof(*tokens) * (size + size_inc + 1));
 			if (!new)
 				free(line), free_tokens(&tokens), malloc_error();
 			tokens = new;
