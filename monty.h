@@ -41,12 +41,28 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
+ * struct freelist_s - struct of allocated memory item to be freed on error
+ * @tokens: address of the tokens array of the next instruction line
+ * @line_buf: address of the line buffer
+ * @data_h: address of the head pointer to the data set
+ * @source: source file
+ */
+typedef struct freelist_s
+{
+	char ***tokens;
+	char **line_buf;
+	stack_t **data_h;
+	FILE **source;
+} freelist;
+
+/**
  * struct monty_s - reference of stack or queue
  * @tokens: the tokens of the next instruction line
  * @data_type: type of data set (0: stack, 1: queue)
  * @data_size: number of elements
  * @data_h: head of the data set
  * @data_t: head of the data set
+ * @to_free: struct of allocated memory item to be freed on error
  */
 typedef struct monty_s
 {
@@ -55,6 +71,7 @@ typedef struct monty_s
 	int data_size;
 	stack_t *data_h;
 	stack_t *data_t;
+	freelist to_free;
 } monty;
 
 extern monty exec_code;
@@ -66,6 +83,7 @@ void parse(char **tokens, int line_num, stack_t **stack);
 
 /*--------------------------errors.c--------------------------*/
 void malloc_error(void);
+void print_error_exit(char *error_msg);
 
 /*--------------------------memory.c--------------------------*/
 void *_realloc(void *ptr, size_t new_size);
@@ -73,12 +91,14 @@ void *_realloc(void *ptr, size_t new_size);
 /*---------------------------free.c---------------------------*/
 void free_tokens(char ***tokens);
 void free_data(void);
+void free_all(freelist to_free);
 
 /*---------------------------atoi.c---------------------------*/
 int _isdigit(int c);
 int _atoi(char *s);
 
 /*---------------------------exec.c---------------------------*/
+void exit_now(void);
 void nop(stack_t **stack, unsigned int line_number);
 
 /*--------------------------data_io.c-------------------------*/

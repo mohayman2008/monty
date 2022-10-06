@@ -15,16 +15,11 @@ void push(stack_t **stack, unsigned int line_number)
 	(void) stack;
 
 	if (!exec_code.tokens[1])
-/*		|| !(isdigit(exec_code.tokens[1][0]) || exec_code.tokens[1][0] == '-' ||*/
-/*			exec_code.tokens[1][0] == '+'))*/
-		/* print_error(line_number, errmsg) */
-		fprintf(stderr, "L%u: %s\n", line_number, errmsg),
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "L%u: %s\n", line_number, errmsg), exit_now();
 /*	num = strtol(exec_code.tokens[1], NULL, 10);*/
 	num = _atoi(exec_code.tokens[1]);
 	if (errno == ERANGE)
-		fprintf(stderr, "L%u: %s\n", line_number, errmsg),
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "L%u: %s\n", line_number, errmsg), exit_now();
 
 	new = malloc(sizeof(*new));
 	if (!new)
@@ -66,7 +61,7 @@ int pop_item(void)
 	exec_code.data_t = tail->prev;
 
 	exec_code.data_size--;
-	if (!exec_code.data_size)
+	if (exec_code.data_size <= 0)
 		exec_code.data_h = NULL;
 
 	free(tail);
@@ -85,7 +80,7 @@ void pop(stack_t **stack, unsigned int line_number)
 	if (!exec_code.data_size)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_now();
 	}
 
 	pop_item();

@@ -37,3 +37,17 @@ void free_data(void)
 	exec_code.data_t = NULL;
 	exec_code.data_size = 0;
 }
+
+/**
+ * free_all - frees all dynamically allocated memory
+ * @to_free: struct of the memory allocated elements
+ */
+void free_all(freelist to_free)
+{
+	free_tokens(to_free.tokens);
+	free_data();
+	if (*to_free.line_buf)
+		free(*to_free.line_buf);
+	if (*to_free.source)
+		fclose(*to_free.source);
+}

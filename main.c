@@ -1,6 +1,6 @@
 #include "monty.h"
 
-monty exec_code = {NULL, 0, 0, NULL, NULL};
+monty exec_code = {NULL, 0, 0, NULL, NULL, {NULL, NULL, NULL, NULL}};
 
 /**
  * iterate - iterate through, parse and execute lines
@@ -13,6 +13,7 @@ void iterate(FILE *ifile)
 	size_t line_buf_size = 0;
 	int line_num = 1;
 
+	exec_code.to_free.line_buf = &line_buf;
 	while (get_code_line(ifile, &line_buf, &line_buf_size))
 	{
 		exec_code.tokens = get_tokens(line_buf);
@@ -44,6 +45,9 @@ int main(int ac, char **av)
 	if (!source)
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]), exit(EXIT_FAILURE);
 
+	exec_code.to_free.tokens = &exec_code.tokens;
+	exec_code.to_free.data_h = &exec_code.data_h;
+	exec_code.to_free.source = &source;
 	iterate(source);
 
 	free_data();
