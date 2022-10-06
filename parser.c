@@ -64,6 +64,7 @@ void parse(char **tokens, int line_num, stack_t **stack)
 	instruction_t list[] = {{"push", push}, {"pall", print_all},
 				{"pint", print_int}, {"pop", pop},
 				{"swap", swap}, {"add", add}, {"sub", sub},
+				{"mul", mul}, {"div", _div}, {"mod", mod},
 				{"nop", nop}, {NULL, 0}};
 	int i = 0;
 
@@ -72,7 +73,9 @@ void parse(char **tokens, int line_num, stack_t **stack)
 
 	for (; list[i].opcode ; i++)
 	{
-		if (!strcmp(tokens[0], list[i].opcode))
+		if (tokens[0][0] == '#')
+			return;
+		else if (!strcmp(tokens[0], list[i].opcode))
 		{
 			list[i].f(stack, line_num);
 			return;

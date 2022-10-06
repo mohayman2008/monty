@@ -88,6 +88,9 @@ void swap(stack_t **stack, unsigned int line_number);
 /*------------------------arithmetic.c------------------------*/
 void add(stack_t **stack, unsigned int line_number);
 void sub(stack_t **stack, unsigned int line_number);
+void _div(stack_t **stack, unsigned int line_number);
+void mul(stack_t **stack, unsigned int line_number);
+void mod(stack_t **stack, unsigned int line_number);
 
 /*--------------------------print.c---------------------------*/
 void print_all(stack_t **stack, unsigned int line_number);
