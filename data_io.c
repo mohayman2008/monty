@@ -16,10 +16,10 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (!exec_code.tokens[1])
 		fprintf(stderr, "L%u: %s\n", line_number, errmsg), exit_now();
-/*	num = _atoi(exec_code.tokens[1]);*/
-	num = strtol(exec_code.tokens[1], NULL, 10);
-	if (errno)
-		fprintf(stderr, "L%u: %s\n", line_number, errmsg), exit_now();
+	num = _atoi(exec_code.tokens[1]);
+/*	num = strtol(exec_code.tokens[1], NULL, 10);*/
+/*	if (errno)*/
+/*		fprintf(stderr, "L%u: %s\n", line_number, errmsg), exit_now();*/
 
 	new = malloc(sizeof(*new));
 	if (!new)
