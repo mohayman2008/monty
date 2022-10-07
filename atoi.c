@@ -39,7 +39,7 @@ int _atoi(char *s)
 			if (multiplier == 1)
 			{
 				if (num != 0)
-				        num = (INT_MAX / num) >= 10 ? num * 10 : INT_MAX;
+					num = (INT_MAX / num) >= 10 ? num * 10 : INT_MAX;
 				num = (INT_MAX - num) >= digit ? num + digit : INT_MAX;
 			}
 			else if (multiplier == -1)
@@ -47,7 +47,7 @@ int _atoi(char *s)
 				if (num > 0)
 					num *= -1;
 				if (num != 0)
-				        num = (INT_MIN / num) >= 10 ? num * 10 : INT_MIN;
+					num = (INT_MIN / num) >= 10 ? num * 10 : INT_MIN;
 				if (INT_MIN - num <= -digit)
 					num -= digit;
 				else
