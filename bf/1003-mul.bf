@@ -26,7 +26,7 @@
 		> -		#2
 	]
 	<< -			#0
-]	   			[X multiplication result at #3 | curser at #0 X]
+]	   			multiplication result at #3 | cursor at #0
 
 >
 [-]				cleaning #1
@@ -34,11 +34,24 @@
 [
 	<<<+
 	>>>-
-]				[X multiplication result at #0 | cursor at #3 X]
-> ++++ ++++ ++ <
+]				multiplication result at #0 | cursor at #3
+> ++++ ++++ ++ <		#4 = 10
 <<<				#0
 
-[->+>>+>-[<-]<[<<[->>>+<<<]>>>>+<<-<]<<]
+[
+	> +			#1 remainder
+	>> +			#3 check
+	> -			#4 divisor
+	[<-]
+	<
+	[
+		<<		#1 remainder
+		[->>>+<<<]	restoring the divisor at #4 from #1 remainder
+		>>>> +		#5 quotient
+		<<-< 		#2
+	]
+	<< -			#0 Divident
+]
 
 >>>>>				#5
 > ++++ ++++
