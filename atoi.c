@@ -24,9 +24,7 @@ int _isdigit(int c)
  */
 int _atoi(char *s)
 {
-	int i = 0;
-	int num = 0, digit, multiplier = 1;
-	int num_found = 0;
+	int i = 0, num = 0, digit, multiplier = 1, num_found = 0;
 
 	while (s[i] != '\0')
 	{
@@ -36,24 +34,24 @@ int _atoi(char *s)
 			multiplier *= -1;
 		else if (_isdigit(s[i]))
 		{
-			digit = s[i] - 48;
-			num_found = 1;
+			digit = s[i] - 48, num_found = 1;
 
 			if (multiplier == 1)
 			{
-				if (num != 0 && (INT_MAX / num) >= 10)
-					num *= 10;
-				if ((INT_MAX - num) >= digit)
-					num += digit;
+				if (num != 0)
+				        num = (INT_MAX / num) >= 10 ? num * 10 : INT_MAX;
+				num = (INT_MAX - num) >= digit ? num + digit : INT_MAX;
 			}
 			else if (multiplier == -1)
 			{
 				if (num > 0)
 					num *= -1;
-				if (num != 0 && (INT_MIN / num) >= 10)
-					num *= 10;
+				if (num != 0)
+				        num = (INT_MIN / num) >= 10 ? num * 10 : INT_MIN;
 				if (INT_MIN - num <= -digit)
 					num -= digit;
+				else
+					return (INT_MIN);
 			}
 		}
 		i++;
