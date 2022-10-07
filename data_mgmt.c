@@ -106,7 +106,7 @@ void rot_right(stack_t **stack, unsigned int line_number)
 		if (exec_code.data_t != head)
 		{
 			exec_code.data_t->next = head;
-			head->prev = exec_code.data_h;
+			head->prev = exec_code.data_t;
 		}
 		exec_code.data_t = head;
 	}
