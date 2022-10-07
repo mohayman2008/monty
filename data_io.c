@@ -16,9 +16,9 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (!exec_code.tokens[1])
 		fprintf(stderr, "L%u: %s\n", line_number, errmsg), exit_now();
-/*	num = strtol(exec_code.tokens[1], NULL, 10);*/
-	num = _atoi(exec_code.tokens[1]);
-	if (errno == ERANGE)
+/*	num = _atoi(exec_code.tokens[1]);*/
+	num = strtol(exec_code.tokens[1], NULL, 10);
+	if (errno == EINVAL)
 		fprintf(stderr, "L%u: %s\n", line_number, errmsg), exit_now();
 
 	new = malloc(sizeof(*new));
